@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+
+/* Global custom styles */
+html, body {
+  @apply bg-gray-50 text-gray-900 font-sans;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  @apply max-w-7xl mx-auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold text-gray-900;
+}
+
+p {
+  @apply text-gray-700;
+}
+
+button:focus {
+  @apply outline-none ring-2 ring-blue-500;
+}
