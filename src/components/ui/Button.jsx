@@ -11,10 +11,10 @@ const Button = ({
 }) => {
   const baseStyles = 'font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2';
   const variants = {
-    primary: 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl',
+    primary: 'bg-primary text-white hover:from-blue-700 hover:bg-accent shadow-lg hover:shadow-xl',
     secondary: 'bg-white text-gray-800 border border-gray-300 hover:bg-gray-50',
     outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white',
-    ghost: 'text-gray-600 hover:bg-gray-100'
+    ghost: 'text-light hover:bg-primary'
   };
   const sizes = {
     sm: 'px-4 py-2 text-sm',

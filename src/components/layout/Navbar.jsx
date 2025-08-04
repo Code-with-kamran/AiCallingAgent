@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import Button from '../ui/Button';
+import { useRouter } from '../../context/RouterContext';
 
 const Navbar = ({ onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { navigate } = useRouter();
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Features', path: '/features' },
@@ -15,24 +16,24 @@ const Navbar = ({ onNavigate }) => {
   ];
 
   return (
-    <nav className="fixed w-full bg-white shadow-sm z-50">
+    <nav className="fixed w-full bg-dark shadow-sm z-50">
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
         
         {/* Logo */}
         <div className="flex items-center space-x-2 cursor-pointer" onClick={() => onNavigate('/')}>
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-gradient-to-br from-brand to-brand-light rounded-lg flex items-center justify-center">
             <Phone className="text-white" size={20} />
           </div>
-          <span className="text-xl font-bold text-gray-900">VoiceAI</span>
+          <span className="text-xl font-bold text-light">VoiceAI</span>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden xl:flex space-x-8">
           {navLinks.map(link => (
             <button
               key={link.name}
-              onClick={() => onNavigate(link.path)}
-              className="text-gray-600 hover:text-blue-600 focus:rounded-md p-2  font-medium"
+              onClick={()=>navigate(link.path)}
+              className="text-light hover:text-accent focus:rounded-md p-2  font-medium"
             >
               {link.name}
             </button>
@@ -40,7 +41,7 @@ const Navbar = ({ onNavigate }) => {
         </div>
 
         {/* Auth Buttons */}
-        <div className="hidden md:flex space-x-4">
+        <div className="hidden xl:flex space-x-4">
           <Button variant="ghost" onClick={() => onNavigate('/login')}>Sign In</Button>
           <Button onClick={() => onNavigate('/signup')}>Get Started</Button>
         </div>

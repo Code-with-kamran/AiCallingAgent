@@ -4,7 +4,6 @@ import { BarChart3, Mic, Target, PhoneCall, Users, History, Calendar, CreditCard
 const Sidebar = ({ currentPath, onNavigate, onLogout }) => {
   const menuItems = [
     { path: '/dashboard', label: 'Dashboard', icon: BarChart3 },
-    { path: '/profile', label: 'Edit Profile', icon: Users },
     { path: '/agents', label: 'AI Agents', icon: Mic },
     { path: '/campaigns', label: 'Outbound Campaigns', icon: Target },
     { path: '/inbound', label: 'Inbound Calls', icon: PhoneCall },
