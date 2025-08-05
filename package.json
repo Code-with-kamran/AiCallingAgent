@@ -9,8 +9,15 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+<<<<<<< HEAD
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
+=======
+     "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
+ 
+  "homepage":"https://code-with-kamran/github.io/AiCallingAgent"
+>>>>>>> 725b41d82f57bcf30f78a1b89753f936e79f85e8
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
