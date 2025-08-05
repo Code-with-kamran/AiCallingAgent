@@ -58,7 +58,7 @@ const AppContent = () => {
             isOpen={sidebarOpen}
             onClose={() => setSidebarOpen(false)}
           />
-          <main className="flex-1 bg-warm-gray  md:ml-64 p-6">
+          <main className="flex-1 bg-warm-gray min-h-screen md:ml-64 p-6">
             {currentPath === '/dashboard' && <DashboardOverview />}
             {currentPath === '/agents' && <AgentManagement />}
             {currentPath === '/campaigns' && <CampaignManagement />}
