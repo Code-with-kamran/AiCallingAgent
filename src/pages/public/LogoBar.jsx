@@ -16,7 +16,7 @@ const LogoBar = () => {
           <span className="text-xl sm:text-2xl font-bold font-heading text-dark mr-4">
             Trusted by 300+ fast-growing companies
           </span>
-          <span className="text-4xl text-yellow-500">🏆</span>
+          
         </div>
         <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16">
           {logos.map((logo) => (

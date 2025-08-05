@@ -1,76 +1,90 @@
 import React, { useState } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
 import { useRouter } from '../../context/RouterContext';
+
+const navLinks = [
+  { name: 'Home',      path: '/' },
+  { name: 'Features',  path: '/features' },
+  { name: 'Use Cases', path: '/use-cases' },
+  { name: 'Pricing',   path: '/pricing' },
+  { name: 'About',     path: '/about' },
+];
 
 const Navbar = ({ onNavigate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { navigate } = useRouter();
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Features', path: '/features' },
-    { name: 'Use Cases', path: '/use-cases' },
-    { name: 'Pricing', path: '/pricing' },
-    { name: 'About', path: '/about' },
-    { name: 'Dashboard', path: '/dashboard' }
-  ];
+
+  const handleLink = (path) => {
+    onNavigate(path);
+    setIsOpen(false);
+  };
 
   return (
-    <nav className="fixed w-full bg-dark shadow-sm z-50">
-      <div className="container mx-auto px-4 flex items-center justify-between h-16">
-        
-        {/* Logo */}
-        <div className="flex items-center space-x-2 cursor-pointer" onClick={() => onNavigate('/')}>
-          <div className="w-8 h-8 bg-gradient-to-br from-brand to-brand-light rounded-lg flex items-center justify-center">
-            <Phone className="text-white" size={20} />
-          </div>
-          <span className="text-xl font-bold text-light">VoiceAI</span>
-        </div>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-dark shadow-md">
+      {/* --- Desktop / Top-bar --- */}
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        {/* Logo (text only) */}
+        <span
+       
+          className="flex items-center text-2xl font-bold cursor-pointer bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
+          onClick={() => handleLink('/')}
+        >
+          <div>
+          <img src="logo.png" title="TALKGEN" className="w-10"/>
+        </div>TALKGEN
+        </span>
 
-        {/* Desktop Menu */}
-        <div className="hidden xl:flex space-x-8">
-          {navLinks.map(link => (
+        {/* Desktop nav */}
+        <div className="hidden lg:flex items-center space-x-6">
+          {navLinks.map(({ name, path }) => (
             <button
-              key={link.name}
-              onClick={()=>navigate(link.path)}
-              className="text-light hover:text-accent focus:rounded-md p-2  font-medium"
+              key={path}
+              onClick={() => handleLink(path)}
+              className="text-light hover:text-accent font-medium"
             >
-              {link.name}
+              {name}
             </button>
           ))}
         </div>
 
-        {/* Auth Buttons */}
-        <div className="hidden xl:flex space-x-4">
-          <Button variant="ghost" onClick={() => onNavigate('/login')}>Sign In</Button>
-          <Button onClick={() => onNavigate('/signup')}>Get Started</Button>
+        {/* Desktop auth buttons */}
+        <div className="hidden lg:flex items-center space-x-3">
+          <Button variant="ghost" onClick={() => handleLink('/login')}>
+            Sign In
+          </Button>
+          <Button onClick={() => handleLink('/signup')}>Get Started</Button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+        {/* Hamburger */}
+        <button
+          className="lg:hidden text-light"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* --- Mobile overlay --- */}
       {isOpen && (
-        <div className="md:hidden bg-white shadow-lg border-t border-gray-200">
-          <div className="flex flex-col space-y-4 p-4">
-            {navLinks.map(link => (
+        <div className="lg:hidden fixed inset-0 top-16 bg-dark/95 backdrop-blur-sm">
+          <div className="flex flex-col items-center justify-center h-full space-y-8 text-center">
+            {navLinks.map(({ name, path }) => (
               <button
-                key={link.name}
-                onClick={() => {
-                  onNavigate(link.path);
-                  setIsOpen(false);
-                }}
-                className="text-gray-700 hover:text-blue-600 font-medium text-left"
+                key={path}
+                onClick={() => handleLink(path)}
+                className="text-2xl text-light hover:text-accent font-medium"
               >
-                {link.name}
+                {name}
               </button>
             ))}
-            <div className="pt-4 border-t space-y-2">
-              <Button variant="ghost" className="w-full" onClick={() => onNavigate('/login')}>Sign In</Button>
-              <Button className="w-full" onClick={() => onNavigate('/signup')}>Get Started</Button>
+
+            <div className="flex flex-col space-y-4 pt-8">
+              <Button variant="ghost" onClick={() => handleLink('/login')}>
+                Sign In
+              </Button>
+              <Button onClick={() => handleLink('/signup')}>Get Started</Button>
             </div>
           </div>
         </div>

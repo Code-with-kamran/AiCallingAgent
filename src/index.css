@@ -1,53 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=FAMILY_NAME:wght@WEIGHT_OR_RANGE&display=swap");
+/* 1. Tailwind directives */
 
+
+/* 3. Custom design tokens via @theme (Tailwind v4) */
 @theme {
-  --color-primary: #0b66ff;
-  --color-accent: #00d1ff;
-  --color-dark: #0a0e1a;
-  --color-light: #ffffff;
-  --color-warm-gray: #f0f2f5;
-   --color-brand: #0B66FF;
-  --font-display: "Inter", sans-serif;
-   --color-brand: #0B66FF;
-  --color-brand-light: #00D1FF;
+  /* Colors */
+  --color-primary:        #0b66ff;
+  --color-accent:         #00d1ff;
+  --color-dark:           #0a0e1a;
+  --color-light:          #ffffff;
+  --color-warm-gray:      #f0f2f5;
+  --color-brand:          #0b66ff;
+  --color-brand-light:    #00d1ff;
 
-  --font-display: "Inter", sans-serif;
+  /* Typography */
+  --font-display:         "Inter", sans-serif;
+  --font-heading:         "Inter", sans-serif;
+  --font-body:            "Inter", sans-serif;
 
-  --leading-body: 1.6;
-  --radius-large: 0.75rem;
-  --font-heading: "Inter", sans-serif;
-  --font-body: "Inter", sans-serif;
   --text-h1: clamp(2rem, 5vw, 3.5rem);
   --text-h2: clamp(1.5rem, 4vw, 2.5rem);
   --text-body: 1rem;
-  --leading-body: 1.6; 
-}
-/* Global custom styles */
-html,
-body {
-  @apply bg-gray-50 text-gray-900 font-sans;
-  margin: 0;
-  padding: 0;
+  --leading-body: 1.6;
+
+  /* Misc */
+  --radius-large: 0.75rem;
 }
 
-.container {
-  @apply max-w-7xl mx-auto;
+/* 4. Global base styles */
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    line-height: var(--leading-body);
+    color: var(--color-dark);
+    background-color: var(--color-light);
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+
+  /* Paragraphs */
+  p {
+    font-family: var(--font-body);
+  }
+
+  /* Focus ring for buttons & links */
+  button:focus,
+  a:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-primary);
+  }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply font-bold;
+/* 5. Re-usable container utility */
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4;
+  }
 }
 
-p {
-  @apply font-body;
+/* ===== Custom Scrollbar ===== */
+/* Track */
+::-webkit-scrollbar {
+  width: 6px;        /* vertical scrollbar */
+  height: 6px;       /* horizontal scrollbar */
 }
 
-button:focus {
-  @apply outline-none ring-2 ring-blue-500;
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: transparent;   /* brand color */
+  border-radius: 3px;
+}
+
+/* Track background */
+::-webkit-scrollbar-track {
+  background-color: #f0f2f5;   /* warm-gray */
+}
+
+/* Optional: hover state */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #0051c7;
 }

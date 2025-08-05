@@ -22,7 +22,7 @@ const AboutPage = () => {
         <section className="py-20 md:py-28">
           <div className="container mx-auto px-4 text-center max-w-3xl">
             <h1 className="font-display text-h1 font-bold text-brand mb-4">
-              About <span className="text-brand-light">VoiceAI</span>
+              About <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">TALKGEN</span>
             </h1>
             <p className="text-lg leading-body text-gray-700">
               We build AI phone agents that never sleep—so your revenue doesn’t
@@ -83,7 +83,7 @@ const AboutPage = () => {
         </section>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

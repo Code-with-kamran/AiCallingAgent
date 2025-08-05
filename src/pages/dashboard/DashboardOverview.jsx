@@ -16,8 +16,8 @@ const DashboardOverview = () => {
   ];
 
   return (
-    <div className="p-6 space-y-8">
-      <h1 className="text-3xl font-bold mb-4">Dashboard Overview</h1>
+    <div className=" bg-warm-gray p-6">
+      <h1 className="text-h1 font-heading font-bold mb-4">Dashboard Overview</h1>
 
       {/* Stats */}
       <div className="grid md:grid-cols-3 gap-6">

@@ -44,12 +44,13 @@ const AppContent = () => {
   if (user && dashboardPaths.includes(currentPath)) {
     return (
       <>
+      <div className="bg-warm-gray">
         <Navbar
           onNavigate={navigate}
           onToggleSidebar={() => setSidebarOpen(true)}
           isDashboard
         />
-        <div className="flex pt-16">
+        <div className="flex pt-16 bg-warm-gray h-screen">
           <Sidebar
             currentPath={currentPath}
             onNavigate={navigate}
@@ -57,7 +58,7 @@ const AppContent = () => {
             isOpen={sidebarOpen}
             onClose={() => setSidebarOpen(false)}
           />
-          <main className="flex-1 bg-gray-50 min-h-screen md:ml-64 p-6">
+          <main className="flex-1 bg-warm-gray  md:ml-64 p-6">
             {currentPath === '/dashboard' && <DashboardOverview />}
             {currentPath === '/agents' && <AgentManagement />}
             {currentPath === '/campaigns' && <CampaignManagement />}
@@ -70,6 +71,7 @@ const AppContent = () => {
             {currentPath === '/profile' && <EditProfilePage />}
           </main>
         </div>
+      </div>
       </>
     );
   }

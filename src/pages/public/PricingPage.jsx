@@ -42,7 +42,7 @@ const PricingPage = () => {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="py-20 md:py-28">
+        <section className="py-20 md:py-28 bg-warm-gray">
           <div className="container mx-auto px-4 text-center">
             <h1 className="font-display text-h1 font-bold text-brand mb-4">
               Simple, transparent pricing
@@ -52,7 +52,7 @@ const PricingPage = () => {
             </p>
 
             {/* Annual / Monthly toggle */}
-            <div className="mt-8 inline-flex items-center gap-4 bg-gray-100 rounded-full p-1">
+            <div className="mt-8 inline-flex items-center gap-4 bg-gray-300 rounded-full p-1">
               <button
                 onClick={() => setIsAnnual(false)}
                 className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
@@ -74,7 +74,7 @@ const PricingPage = () => {
         </section>
 
         {/* Cards */}
-        <section className="pb-20 md:pb-28">
+        <section className="pb-20 md:pb-28 bg-warm-gray">
           <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8 max-w-6xl">
             {plans.map((plan) => (
               <div
@@ -158,7 +158,6 @@ const PricingPage = () => {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 };

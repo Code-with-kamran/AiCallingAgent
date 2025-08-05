@@ -1,7 +1,9 @@
-import React from 'react';
-import { BarChart3, Mic, Target, PhoneCall, Users, History, Calendar, CreditCard, Settings, LogOut } from 'lucide-react';
+import React, { useState } from 'react';
+import { BarChart3, Mic, Target, PhoneCall, Users, History, Calendar, CreditCard, Settings, LogOut, Menu, X } from 'lucide-react';
 
 const Sidebar = ({ currentPath, onNavigate, onLogout }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const menuItems = [
     { path: '/dashboard', label: 'Dashboard', icon: BarChart3 },
     { path: '/agents', label: 'AI Agents', icon: Mic },
@@ -11,36 +13,78 @@ const Sidebar = ({ currentPath, onNavigate, onLogout }) => {
     { path: '/history', label: 'Call History', icon: History },
     { path: '/calendar', label: 'Calendar', icon: Calendar },
     { path: '/billing', label: 'Billing', icon: CreditCard },
+     { path: '/profile', label: 'Edit Profile', icon: Settings },
     { path: '/settings', label: 'Settings', icon: Settings }
   ];
 
-  return (
-    <aside className="hidden md:flex flex-col w-64 h-screen bg-white border-r border-gray-200 fixed">
-      <div className="p-6 font-bold text-xl text-blue-600">VoiceAI</div>
-      <nav className="flex-1 space-y-2 px-4">
-        {menuItems.map(item => {
-          const Icon = item.icon;
-          return (
-            <button
-              key={item.path}
-              onClick={() => onNavigate(item.path)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition ${
-                currentPath === item.path ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              <Icon size={20} />
-              {item.label}
-            </button>
-          );
-        })}
+  /* ---------- Sidebar drawer ---------- */
+  const SidebarContent = ({ mobile }) => (
+    <aside
+      className={
+        mobile
+          ? `fixed inset-y-0 left-0 z-30 w-64 bg-dark text-light flex flex-col transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`
+          : 'hidden lg:flex lg:flex-col lg:w-64 lg:bg-dark lg:text-light lg:fixed lg:inset-y-0 lg:left-0'
+      }
+    >
+      {/* Brand */}
+      <div className="h-16 flex items-center px-4 border-b border-gray-700">
+        <h2 className="text-xl font-bold">VoiceAI</h2>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 px-4 py-4 space-y-2 overflow-y-auto">
+        {menuItems.map(({ path, label, icon: Icon }) => (
+          <button
+            key={path}
+            onClick={() => {
+              onNavigate(path);
+              setSidebarOpen(false);
+            }}
+            className={`w-full flex items-center space-x-3 px-3 py-2 rounded-md text-sm font-medium transition-colors
+              ${currentPath === path ? 'bg-brand text-white' : 'hover:bg-gray-700'}`}
+          >
+            <Icon size={18} />
+            <span>{label}</span>
+          </button>
+        ))}
       </nav>
-      <button
-        onClick={onLogout}
-        className="flex items-center gap-2 px-4 py-3 text-gray-500 hover:text-red-600"
-      >
-        <LogOut size={18} /> Logout
-      </button>
+
+      {/* Logout */}
+      <div className="p-4 border-t border-gray-700">
+        <button
+          onClick={onLogout}
+          className="w-full flex items-center space-x-3 px-3 py-2 rounded-md text-sm font-medium text-red-400 hover:bg-red-900/30"
+        >
+          <LogOut size={18} />
+          <span>Logout</span>
+        </button>
+      </div>
     </aside>
+  );
+
+  return (
+    <>
+      {/* Desktop / fixed sidebar */}
+      <SidebarContent mobile={false} />
+
+      {/* Mobile overlay drawer */}
+      <SidebarContent mobile={true} />
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-20 bg-black/40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Hamburger button (only on mobile) */}
+      <button
+        className="lg:hidden fixed top-18 right-8 text-dark bg-transparent z-40 p-2  z-3 rounded-md shadow"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        {/* {sidebarOpen ? <X size={24} /> : <Menu size={24} />} */}
+        {sidebarOpen ?  <p>Close Sidebar</p>: <p>Open Sidebar</p>}
+      </button>
+    </>
   );
 };
 
